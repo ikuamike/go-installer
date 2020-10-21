@@ -1,3 +1,6 @@
+## This code has been edited to suite my needs, please use the original repo
+
+
 <h1 align="center"> Go Installer 🐹 </h1>
 
 <p align="center">
