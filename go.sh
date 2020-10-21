@@ -87,7 +87,7 @@ function remove() {
   what_installed_version
   echo "$($TEXT_COLOR $RED)removing $INSTALLED_VERSION${RESET} from ${GOROOT}"
 
-  if ! rm -r "$GOROOT"; then
+  if ! sudo rm -rf "$GOROOT"; then
     echo "$($TEXT_COLOR $RED)Couldn't remove Go${RESET}."
     echo "Can't remove contents of $GOROOT"
     echo "Maybe you need to run the script with root privileges!"
@@ -96,14 +96,6 @@ function remove() {
   fi
 
   RC_PROFILE="$HOME/.${shell_profile}"
-
-  echo "Creating a backup of your ${RC_PROFILE} to ${RC_PROFILE}-BACKUP"
-  cp "$RC_PROFILE" "${RC_PROFILE}-BACKUP"
-  echo "Removing exports for GOROOT & GOPATH from ${RC_PROFILE}"
-  sed -i '/export GOROOT/d' "${RC_PROFILE}"
-  sed -i '/:$GOROOT/d' "${RC_PROFILE}"
-  sed -i '/export GOPATH/d' "${RC_PROFILE}"
-  sed -i '/:$GOPATH/d' "${RC_PROFILE}"
 
   echo "$($TEXT_COLOR $GREEN)Uninstalled Go Successfully!${RESET}"
 }
@@ -139,23 +131,26 @@ function install_go() {
 
   eval "$CLEAR_UP"
 
-  mkdir -p "$GOPATH"/{src,pkg,bin} "$GOROOT"
+  mkdir -p "$GOPATH"/{src,pkg,bin} 
+  sudo mkdir -p "$GOROOT"
 
   echo "Extracting $latest_version_file_name files to $GOROOT..."
 
   tar -xzf "$latest_version_file_name"
 
-  mv go/* "$GOROOT"
+  sudo mv go/* "$GOROOT"
   rmdir go
 
   what_shell_profile
 
-  touch "$HOME/.${shell_profile}"
-  {
-    echo "export GOROOT=$GOROOT"
-    echo "export GOPATH=$GOPATH"
-    echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin'
-  } >>"$HOME/.${shell_profile}"
+  if [ -z "$GOPATH" ]; then
+	  [ ! -e "$HOME/.${shell_profile}" ] && touch "$HOME/.${shell_profile}"
+	  {
+		echo "export GOROOT=$GOROOT"
+		echo "export GOPATH=$GOPATH"
+		echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin'
+	  } >>"$HOME/.${shell_profile}"
+  fi
 
   eval "$CLEAR_UP"
 }
