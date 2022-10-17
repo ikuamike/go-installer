@@ -1,31 +1,15 @@
-## This code has been edited to suite my needs, please use the original repo
 
+## This code has been edited to suit my needs, please use the original repo
 
 <h1 align="center"> Go Installer 🐹 </h1>
-
-<p align="center">
-  <a href="https://github.com/kerolloz/go-installer/issues">
-    <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat">
-  </a>
-
-  <a href="https://travis-ci.com/kerolloz/go-installer">
-    <img src="https://travis-ci.com/kerolloz/go-installer.svg?branch=master">
-  </a>
-  <br>
-  Install Golang on Linux or Mac <strike>with hassle of environment variables setting</strike>.
-  <img src="https://pilsniak.com/wp-content/uploads/2017/04/golang.jpg" width="50%">
-  
-</p>
 
 ## How to use it :thinking:
 
 ### Installing(or updating) Go :arrow_down:
 
-You can clone the repository or just use `wget` to download the script
 
 ```bash
-wget https://raw.githubusercontent.com/kerolloz/go-installer/master/go.sh
-bash go.sh
+curl -s https://raw.githubusercontent.com/ikuamike/go-installer/master/go.sh | bash
 ```
 
 Now, You can go grab a cup of coffee :coffee:, set back :relieved: and watch the magic happen! :crystal_ball:
@@ -75,18 +59,6 @@ The script does the following steps:
       <p align="center">WORKS LIKE A CHARM :rocket:</p>
   </blockquote>
 </p>
-
-## Tests
-
-Tested by Travis :heavy_check_mark: on:
-
-- Linux :penguin:
-- Mac :computer:
-
-Tested manually on:
-
-- Ubuntu
-- Manjaro
 
 ## License
 
